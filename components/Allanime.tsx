@@ -21,12 +21,11 @@ const Allanime = async () => {
         {data.data.map((anime: any, index: number) => (
           <>
             <div
-              key={index}
+              key={anime.mal_id}
               className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6 transition p-4"
             >
               <Link
                 className="block"
-                key={anime.mal_id}
                 href={`/anime/${anime.mal_id}`}
                 target="_blank"
                 rel="noreferrer"
