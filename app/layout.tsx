@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-  themeColor: "#000000",
   keywords: "XotoNime, anime, anime list",
   authors: [{ name: "XotoNime", url: "https://xotonime.xyz" }],
   twitter: {
@@ -30,21 +29,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <meta property="twitter:card" content="summary_large_image"></meta>
         <meta property="twitter:site" content="@xotonime"></meta>
         <meta property="twitter:creator" content="@xotonime"></meta>
-        <meta property="twitter:title" content="XotoNime"></meta>
-        <meta property="twitter:description" content="Anime List"></meta>
         <meta property="twitter:image" content="/favicon.ico"></meta>
         <meta property="og:title" content="XotoNime" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://xotonime.xyz" />
-        <meta property="og:image" content="/favicon.ico" />
-        <meta property="og:description" content="Anime List" />
-        <meta property="og:site_name" content="XotoNime" />
-        <meta property="og:locale" content="id_ID" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1909779298462458"
+          crossOrigin="anonymous"
+        ></script>
+        ;
       </Head>
       <body className={inter.className}>
         <header>
