@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 // eslint-disable-next-line @next/next/no-async-client-component
 const Search = () => {
-  const searchRef = useRef<HTMLInputElement>();
+  const searchRef: any = useRef<HTMLInputElement>();
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent | any) => {
