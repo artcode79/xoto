@@ -11,6 +11,7 @@ const TopAnime = async ({
   waktu,
   links,
   classname,
+  hari,
 }: any) => {
   return (
     <>
@@ -30,6 +31,7 @@ const TopAnime = async ({
           <p className="text-gray-500 mb-2">{score}</p>
           <p className="text-gray-500 mb-2">{description}</p>
           <p className="text-gray-500 mb-2">{waktu}</p>
+          <p className="text-gray-500 mb-2">{hari}</p>
           <Link
             href={links}
             className="bg-blue-500 hover:bg-blue-600  text-white font-bold py-2 px-4 rounded mt-4"

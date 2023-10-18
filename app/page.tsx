@@ -1,47 +1,79 @@
 import Allanime from "@/components/Allanime";
+import ReactPaginate from "react-paginate";
+import React from "react";
 import TopAnime from "@/components/TopAnime";
-import type { Metadata } from "next";
-const animeURL = process.env.ANIMEURI;
+import type { GetServerSideProps, Metadata } from "next";
+import Link from "next/link";
+const animeURL = process.env.ANIME;
 
+interface Data {
+  ongoing: {
+    title: string;
+    thumb: string;
+    total_episode: string;
+    updated_on: string;
+    updated_day: string;
+    endpoint: string;
+  }[];
+}
 export const metadata: Metadata = {
-  title: `XotoNime | Home`,
-  description: "Home Page of XotoNime",
-  keywords:
-    "XotoNime, Home, Top Anime, Anime, Anime List, Anime List Website, Anime List App, Anime List Mobile App, Anime List Desktop App, Anime List Web App, Anime List Mobile App, Anime List Web App, Anime List Mobile App, Anime List Web App, Anime List Mobile App, Anime List Web App, Anime List Mobile App, Anime List Web App, Anime",
-  generator: "XotoNime",
+  title: "Home",
 };
+
 const Home = async () => {
-  const response = await fetch(`${animeURL}/top/anime/`, {
+  const response = await fetch(`${animeURL}/api/v1/ongoing/1`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
     next: { revalidate: 60, tags: ["topanime", "anime"] },
   });
-  const data = await response.json();
+  const data: Data = await response.json();
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <h1 className="text-4xl font-bold">Welcome to my Anime List</h1>
-        <h2 className="text-2xl font-bold">Top Anime</h2>
+
+        <h2 className="text-2xl font-bold">On Going Anime</h2>
+        <Link
+          href="/ongoing"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-sm hover:shadow-lg"
+        >
+          see all
+        </Link>
         <div className="flex flex-wrap justify-center gap-2">
-          {data.data.map((anime: any) => (
-            <TopAnime
-              key={anime.mal_id}
-              classname="w-[400px] h-[600px]"
-              links="#"
-              description={anime.synopsis.slice(0, 100) + "..."}
-              title={anime.title.slice(0, 20) + "..."}
-              image={anime.images.jpg.image_url}
-              score={anime.score}
-              waktu={anime.aired.string}
-            />
-          ))}
+          {data.ongoing.length > 0 &&
+            data.ongoing.map((anime) => (
+              <TopAnime
+                key={anime.endpoint}
+                title={anime.title}
+                image={anime.thumb}
+                description={anime.total_episode}
+                links={anime.endpoint}
+                waktu={anime.updated_on}
+                hari={anime.updated_day}
+                endpoint={anime.endpoint}
+              />
+            ))}
         </div>
-        <h2 className="text-2xl font-bold">All Anime</h2>
-        <Allanime />
-        <div></div>
+
+        <div className="flex  mt-[2rem]">
+          <h2 className="text-2xl font-bold justify-start items-start">
+            All Anime
+          </h2>
+          <Link
+            href="/allanime"
+            className="bg-blue-500 hover:bg-blue-700 justify-end items-end text-white font-bold py-2 px-4 rounded shadow-sm hover:shadow-lg"
+          >
+            see all
+          </Link>
+        </div>
+        {/* <Allanime /> */}
       </main>
     </>
   );

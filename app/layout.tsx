@@ -19,6 +19,28 @@ export const metadata: Metadata = {
     title: "XotoNime",
     description: "Anime List",
   },
+  openGraph: {
+    title: "XotoNime",
+    description: "Anime List",
+    url: "https://xoto.varcel.com",
+    images: [{ url: "/favicon.ico" }],
+  },
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  viewport: "width=device-width, initial-scale=1",
+  creator: "XotoNime",
+  generator: "XotoNime",
 };
 
 export default function RootLayout({
@@ -29,18 +51,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <meta property="twitter:site" content="@xotonime"></meta>
-        <meta property="twitter:creator" content="@xotonime"></meta>
-        <meta property="twitter:image" content="/favicon.ico"></meta>
-        <meta property="og:title" content="XotoNime" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://xotonime.xyz" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1909779298462458"
           crossOrigin="anonymous"
         ></script>
-        ;
+        <script
+          async
+          type="text/javascript"
+          src="//pl20999686.highcpmrevenuegate.com/2f/4b/11/2f4b11fa855f85552cd098e0dd6d2ac0.js"
+        ></script>
+        <script
+          async
+          type="text/javascript"
+          src="//pl20999614.highcpmrevenuegate.com/cc/1f/71/cc1f71564592ba7360aaf0db07c10ea9.js"
+        ></script>
       </Head>
       <body className={inter.className}>
         <header>

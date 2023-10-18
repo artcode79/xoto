@@ -9,9 +9,12 @@ const Search = () => {
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent | any) => {
-    e.preventDefault();
     const searchTerm = searchRef.current.value;
-    router.push(`/search/${searchTerm}`);
+    if (!searchTerm) return;
+    if (e.key === "Enter" || e.type === "click") {
+      e.preventDefault();
+      router.push(`/search/${searchTerm}`);
+    }
   };
 
   return (
@@ -25,6 +28,7 @@ const Search = () => {
           type="text"
           placeholder="Search"
           className="bg-gray-200 rounded-md p-2"
+          onKeyDown={handleSubmit}
         />
         <button type="submit" className="bg-gray-200 rounded-md p-2">
           <Image

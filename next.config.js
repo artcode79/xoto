@@ -7,6 +7,7 @@ const nextConfig = {
       "wallpapercave.com",
       "cdn.myanimelist.net",
       "cdn-icons-png.flaticon.com",
+      "otakudesu.wiki",
     ],
   },
 };

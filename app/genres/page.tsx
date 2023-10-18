@@ -1,9 +1,9 @@
 import React from "react";
 
-const genreUrl = process.env.ANIMEURI;
+const genreUrl = process.env.ANIME;
 
 const Genres = async () => {
-  const response = await fetch(`${genreUrl}/genres/anime`);
+  const response = await fetch(`${genreUrl}/api/v1/genres`);
   const data = await response.json();
   console.log(data);
 
@@ -11,8 +11,8 @@ const Genres = async () => {
     <>
       <h1>Genres</h1>
       <ul>
-        {data.data.map((genre: any) => (
-          <li key={genre.mal_id}>{genre.name}</li>
+        {data.genres.map((genre: any) => (
+          <li key={genre.endpoint}>{genre.genre}</li>
         ))}
       </ul>
     </>
