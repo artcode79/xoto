@@ -2,10 +2,10 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const animeURL = process.env.ANIME;
+const animeURL = process.env.ANIMEURI;
 
 const Allanime = async () => {
-  const response = await fetch(`${animeURL}/api/v1/`, {
+  const response = await fetch(`${animeURL}/anime`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

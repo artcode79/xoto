@@ -2,26 +2,82 @@ import Allanime from "@/components/Allanime";
 import ReactPaginate from "react-paginate";
 import React from "react";
 import TopAnime from "@/components/TopAnime";
-import type { GetServerSideProps, Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
-const animeURL = process.env.ANIME;
+const animeURL = process.env.ANIMEURI;
 
 interface Data {
-  ongoing: {
+  data: {
+    [x: string]: any;
+    mal_id: number;
+    url: string;
+    images: {
+      jpg: {
+        image_url: string;
+        small_image_url: string;
+      };
+      webp: {
+        image_url: string;
+      };
+    };
+    trailer: {
+      youtube_id: string;
+      url: string;
+      embed_url: string;
+      images: {
+        image_url: string;
+        maximum_image_url: string;
+      };
+    };
+    approved: true;
     title: string;
-    thumb: string;
-    total_episode: string;
-    updated_on: string;
-    updated_day: string;
-    endpoint: string;
-  }[];
+    type: string;
+    source: string;
+    episodes: number;
+    status: string;
+    aired: {
+      from: string;
+      to: string;
+    };
+    score: number;
+    synopsis: string;
+    season: string;
+    year: number;
+
+    genres: [
+      {
+        mal_id: number;
+        type: string;
+        name: string;
+        url: string;
+      },
+      {
+        mal_id: number;
+        type: string;
+        name: string;
+        url: string;
+      },
+      {
+        mal_id: number;
+        type: string;
+        name: string;
+        url: string;
+      },
+      {
+        mal_id: number;
+        type: string;
+        name: string;
+        url: string;
+      }
+    ];
+  };
 }
 export const metadata: Metadata = {
   title: "Home",
 };
 
 const Home = async () => {
-  const response = await fetch(`${animeURL}/api/v1/ongoing/1`, {
+  const response = await fetch(`${animeURL}/top/anime?limit=10`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -36,9 +92,10 @@ const Home = async () => {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1 className="text-4xl font-bold">Welcome to my Anime List</h1>
-
+      <h1 className="text-4xl font-bold text-center mt-[20px]">
+        Welcome to my Anime List
+      </h1>
+      <div className="flex justify-center gap-[85rem] md:gap-20 sm:gap-7 lg:gap-[50rem]">
         <h2 className="text-2xl font-bold">On Going Anime</h2>
         <Link
           href="/ongoing"
@@ -46,35 +103,38 @@ const Home = async () => {
         >
           see all
         </Link>
-        <div className="flex flex-wrap justify-center gap-2">
-          {data.ongoing.length > 0 &&
-            data.ongoing.map((anime) => (
-              <TopAnime
-                key={anime.endpoint}
-                title={anime.title}
-                image={anime.thumb}
-                description={anime.total_episode}
-                links={anime.endpoint}
-                waktu={anime.updated_on}
-                hari={anime.updated_day}
-                endpoint={anime.endpoint}
-              />
-            ))}
-        </div>
+      </div>
 
-        <div className="flex  mt-[2rem]">
-          <h2 className="text-2xl font-bold justify-start items-start">
-            All Anime
-          </h2>
-          <Link
-            href="/allanime"
-            className="bg-blue-500 hover:bg-blue-700 justify-end items-end text-white font-bold py-2 px-4 rounded shadow-sm hover:shadow-lg"
-          >
-            see all
-          </Link>
+      <div className=" items-center justify-between p-4">
+        <div className="flex flex-wrap justify-center gap-2">
+          {data.data.map((anime: any) => (
+            <TopAnime
+              key={anime.mal_id}
+              title={anime.title}
+              image={anime.images.jpg.image_url}
+              links="#"
+              waktu={anime.aired.from.toString("dddd, DD MMMM YYYY")}
+              hari={toString.call(anime.aired.to)}
+            />
+          ))}
         </div>
-        {/* <Allanime /> */}
-      </main>
+      </div>
+      <br />
+      <h2 className="font-semibold text-xl text-teal-950 text-center my-10">
+        All List Anime
+      </h2>
+      <div className="flex justify-center  mt-[4rem] gap-[85rem] md:gap-20 sm:gap-7 lg:gap-[50rem]">
+        <h2 className="text-2xl font-bold">All Anime</h2>
+        <Link
+          href="/allanime"
+          className="bg-blue-500 hover:bg-blue-700 justify-end items-end text-white font-bold py-2 px-4 rounded shadow-sm hover:shadow-lg"
+        >
+          see all
+        </Link>
+      </div>
+      <div className="mx-3">
+        <Allanime />
+      </div>
     </>
   );
 };

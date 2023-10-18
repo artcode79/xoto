@@ -1,7 +1,13 @@
 import React from "react";
 
 const Page = () => {
-  return <div>Page</div>;
+  return (
+    <>
+      {/* Header */}
+      {/*list anime*/}
+      {/*Pagina*/}
+    </>
+  );
 };
 
 export default Page;
